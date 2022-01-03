@@ -12,8 +12,8 @@ import CutScreen from './screens/CutScreen';
 import InicioScreen from './screens/InicioScreen';
 import LoaderScreen from './screens/LoaderScreen';
 import MinhaCarteiraScreen from './screens/MinhaCarteiraScreen';
-import MinhaContaCopyScreen from './screens/MinhaContaCopyScreen';
 import MinhaContaScreen from './screens/MinhaContaScreen';
+import RestaurantListScreen from './screens/RestaurantListScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -158,6 +158,11 @@ export default function RootAppNavigator() {
             animationEnabled: true,
             title: 'cut',
           }}
+        />
+        <Stack.Screen
+          name="RestaurantListScreen"
+          component={RestaurantListScreen}
+          options={{ title: ' Restaurant List' }}
         />
         <Stack.Screen
           name="BottomTabNavigator"

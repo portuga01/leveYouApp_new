@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "blank structure app",
-    "slug": "blank-structure-app",
-    "scheme": "blank-structure-app",
+    "slug": "leveyou",
+    "scheme": "leveyou",
     "description": "Description of app where",
     "privacy": "unlisted",
     "platforms": [
@@ -29,7 +29,12 @@
     "android": {
       "versionCode": 1,
       "package": "com.draftbit.untitledapp",
-      "permissions": []
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "USE_FINGERPRINT"
+      ]
     },
     "web": {
       "themeColor": "#000000"

@@ -9,8 +9,8 @@ import useFetch from 'react-fetch-hook';
 import { useIsFocused } from '@react-navigation/native';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 
-export const loaderAppGET = (Constants, { postalCode }) =>
-  fetch(`https://leveyou.app/br/loaderapp/?postalCode=${postalCode || ''}`, {
+export const loaderAppGET = Constants =>
+  fetch(`https://leveyou.app/br/loaderapp/?postalCode=49400000`, {
     headers: {
       Accept: 'application/json',
       Authorization:
@@ -31,15 +31,11 @@ export const useLoaderAppGET = args => {
   return useQuery('loaderapp', () => loaderAppGET(Constants, args));
 };
 
-export const FetchLoaderAppGET = ({
-  children,
-  onData = () => {},
-  postalCode,
-}) => {
+export const FetchLoaderAppGET = ({ children, onData = () => {} }) => {
   const Constants = GlobalVariables.useValues();
   const isFocused = useIsFocused();
 
-  const { loading, data, error } = useLoaderAppGET({ postalCode });
+  const { loading, data, error } = useLoaderAppGET();
 
   React.useEffect(() => {
     if (error) {

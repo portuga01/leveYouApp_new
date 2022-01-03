@@ -83,17 +83,7 @@ const CutScreen = props => {
                 </Touchable>
               </View>
             </View>
-
-            <View style={styles.ViewMR} removeClippedSubviews={false}>
-              <Text
-                style={[styles.TextGI, { color: theme.colors.secondary }]}
-                textBreakStrategy={'highquality'}
-              >
-                {
-                  'You listened to 562 genres this year, including 148 new ones.'
-                }
-              </Text>
-            </View>
+            <View style={styles.ViewMR} removeClippedSubviews={false} />
           </Container>
         </View>
 
@@ -176,13 +166,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     marginRight: 24,
     marginLeft: 24,
-  },
-  TextGI: {
-    textAlign: 'center',
-    marginTop: 100,
-    fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 50,
   },
   ViewMR: {
     alignItems: 'center',

@@ -33,12 +33,13 @@ const InicioScreen = props => {
   const { theme } = props;
 
   // Verificar se o banner verde de campanha está ativo para este CEP
-  const bannerTopIsActive = dataToAnalytics => {
-    console.log(dataToAnalytics);
-  };
-
-  const calcDiscount = (oldValue, newValue) => {
-    return '40%';
+  const bannerTopIsActive = configFileJson => {
+    try {
+      //return configFileJson.campaign.active;
+      return true;
+    } catch (e) {
+      return false;
+    }
   };
 
   const [tabView1, setTabView1] = React.useState('');
@@ -49,29 +50,35 @@ const InicioScreen = props => {
       hasSafeArea={true}
       scrollable={true}
     >
-      <Touchable>
-        <View
-          style={[styles.View_4h, { backgroundColor: theme.colors.yellowcard }]}
-          pointerEvents={'auto'}
-        >
-          <Text
-            style={[styles.TextpP, { color: theme.colors.strong }]}
-            ellipsizeMode={'tail'}
-            numberOfLines={1}
-          >
-            {'Quer desconto? 👀'}
-          </Text>
+      <>
+        {!bannerTopIsActive(Constants['configFileJson']) ? null : (
+          <Touchable>
+            <View
+              style={[
+                styles.View_4h,
+                { backgroundColor: theme.colors.yellowcard },
+              ]}
+              pointerEvents={'auto'}
+            >
+              <Text
+                style={[styles.TextpP, { color: theme.colors.strong }]}
+                ellipsizeMode={'tail'}
+                numberOfLines={1}
+              >
+                {'{Constants["configFileJson"].campaign.name}'}
+              </Text>
 
-          <Text
-            style={[styles.TextBA, { color: theme.colors.strong }]}
-            ellipsizeMode={'tail'}
-            numberOfLines={2}
-          >
-            {'Clique aqui e veja o que selecionamos para você'}
-          </Text>
-        </View>
-      </Touchable>
-
+              <Text
+                style={[styles.TextBA, { color: theme.colors.strong }]}
+                ellipsizeMode={'tail'}
+                numberOfLines={2}
+              >
+                {null}
+              </Text>
+            </View>
+          </Touchable>
+        )}
+      </>
       <View style={styles.ViewZb}>
         <Image
           style={styles.ImageYr}
@@ -345,141 +352,40 @@ const InicioScreen = props => {
       <>
         {!!tabView1 ? null : (
           <View pointerEvents={'auto'}>
-            <View style={styles.View_5p} pointerEvents={'auto'}>
-              <Touchable style={styles.Touchable_0r}>
-                <View pointerEvents={'auto'}>
-                  <View
-                    style={[
-                      styles.ViewwG,
-                      {
-                        backgroundColor: theme.colors.divider,
-                        borderRadius: theme.roundness,
-                      },
-                    ]}
-                  >
-                    <Image
-                      style={[
-                        styles.ImageBW,
-                        { borderRadius: theme.roundness },
-                      ]}
-                      source={{
-                        uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                      }}
-                      resizeMode={'cover'}
-                    />
-                    <View
-                      style={[
-                        styles.ViewgO,
-                        {
-                          borderRadius: 6,
-                          borderColor: theme.colors.light,
-                          backgroundColor: theme.colors.strongInverse,
-                        },
-                      ]}
-                      pointerEvents={'auto'}
-                    >
-                      <Text
-                        style={[styles.TextnT, { color: theme.colors.medium }]}
-                        ellipsizeMode={'clip'}
-                        numberOfLines={1}
-                      >
-                        {'R$ '}
-                        {'179,90'}
-                      </Text>
-
-                      <View style={styles.Viewer} pointerEvents={'auto'}>
-                        <Icon
-                          name={'MaterialIcons/arrow-downward'}
-                          color={theme.colors.error}
-                          size={19}
-                        />
-                        <Text
-                          style={[styles.TexthS, { color: theme.colors.error }]}
-                        >
-                          {calcDiscount(149)}
-                          {' off'}
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-
+            <View style={styles.ViewbR} pointerEvents={'auto'}>
+              <View style={styles.ViewO8} pointerEvents={'auto'}>
+                <View
+                  style={[
+                    styles.Viewsz,
+                    {
+                      backgroundColor: theme.colors.divider,
+                      borderRadius: theme.roundness,
+                    },
+                  ]}
+                >
+                  <Image
+                    style={[styles.ImageQs, { borderRadius: theme.roundness }]}
+                    source={Images.DraftbitTeamPhoto}
+                    resizeMode={'cover'}
+                  />
                   <Text
-                    style={[styles.Text_7a, { color: theme.colors.medium }]}
+                    style={[styles.Textnz, { color: theme.colors.medium }]}
                     ellipsizeMode={'tail'}
-                    numberOfLines={1}
+                    numberOfLines={2}
                   >
-                    {'Descrição rápida do produto'}
+                    {'test1'}
+                  </Text>
+
+                  <Text style={[styles.TextJT, { color: theme.colors.medium }]}>
+                    {'teste2'}
                   </Text>
                 </View>
-              </Touchable>
-            </View>
-
-            <View style={styles.Viewd3} pointerEvents={'auto'}>
-              <View style={styles.ViewDW} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.Viewdo,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImagetA, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?car',
-                    }}
-                    resizeMode={'cover'}
-                  />
-                  <View
-                    style={[
-                      styles.ViewXX,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
-                  >
-                    <Text
-                      style={[styles.TextpE, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
-
-                    <View style={styles.ViewWj} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.TextWP, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <Text
-                  style={[styles.Text_9m, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
               </View>
 
-              <View style={styles.View_5X} pointerEvents={'auto'}>
+              <View style={styles.ViewfT} pointerEvents={'auto'}>
                 <View
                   style={[
-                    styles.View_1m,
+                    styles.Viewlp,
                     {
                       backgroundColor: theme.colors.divider,
                       borderRadius: theme.roundness,
@@ -487,302 +393,22 @@ const InicioScreen = props => {
                   ]}
                 >
                   <Image
-                    style={[styles.ImageRc, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                    }}
+                    style={[styles.ImageNb, { borderRadius: theme.roundness }]}
+                    source={Images.DraftbitTeamPhoto}
                     resizeMode={'cover'}
                   />
-                  <View
-                    style={[
-                      styles.Viewo6,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
+                  <Text
+                    style={[styles.TextgJ, { color: theme.colors.medium }]}
+                    ellipsizeMode={'tail'}
+                    numberOfLines={2}
                   >
-                    <Text
-                      style={[styles.Textke, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
+                    {'test1'}
+                  </Text>
 
-                    <View style={styles.ViewpF} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.Texte8, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
+                  <Text style={[styles.TextDs, { color: theme.colors.medium }]}>
+                    {'teste2'}
+                  </Text>
                 </View>
-
-                <Text
-                  style={[styles.Textb6, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.ViewXR} pointerEvents={'auto'}>
-              <View style={styles.ViewsV} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewKM,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImageQ9, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                    }}
-                    resizeMode={'cover'}
-                  />
-                  <View
-                    style={[
-                      styles.View_6w,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
-                  >
-                    <Text
-                      style={[styles.TextIJ, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
-
-                    <View style={styles.Viewil} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.Textqn, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <Text
-                  style={[styles.Textba, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
-              </View>
-
-              <View style={styles.ViewkC} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewKN,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Imagern, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                    }}
-                    resizeMode={'cover'}
-                  />
-                  <View
-                    style={[
-                      styles.ViewuN,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
-                  >
-                    <Text
-                      style={[styles.TextpZ, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
-
-                    <View style={styles.ViewFl} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.TextcU, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <Text
-                  style={[styles.TextFU, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.ViewQc} pointerEvents={'auto'}>
-              <View style={styles.View_9a} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.Viewkv,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImageaA, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                    }}
-                    resizeMode={'cover'}
-                  />
-                  <View
-                    style={[
-                      styles.ViewtW,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
-                  >
-                    <Text
-                      style={[styles.TextAO, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
-
-                    <View style={styles.Vieww5} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.TextID, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <Text
-                  style={[styles.TextI9, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
-              </View>
-
-              <View style={styles.ViewZd} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.View_0p,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Imageyr, { borderRadius: theme.roundness }]}
-                    source={{
-                      uri: 'https://source.unsplash.com/random/200x200?motocycle',
-                    }}
-                    resizeMode={'cover'}
-                  />
-                  <View
-                    style={[
-                      styles.View_4r,
-                      {
-                        borderRadius: 6,
-                        borderColor: theme.colors.light,
-                        backgroundColor: theme.colors.strongInverse,
-                      },
-                    ]}
-                    pointerEvents={'auto'}
-                  >
-                    <Text
-                      style={[styles.TextQW, { color: theme.colors.medium }]}
-                      ellipsizeMode={'clip'}
-                      numberOfLines={1}
-                    >
-                      {'R$ '}
-                      {'179,90'}
-                    </Text>
-
-                    <View style={styles.View_1N} pointerEvents={'auto'}>
-                      <Icon
-                        name={'MaterialIcons/arrow-downward'}
-                        color={theme.colors.error}
-                        size={19}
-                      />
-                      <Text
-                        style={[styles.Textx4, { color: theme.colors.error }]}
-                      >
-                        {'40% off'}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <Text
-                  style={[styles.TextyL, { color: theme.colors.medium }]}
-                  ellipsizeMode={'tail'}
-                  numberOfLines={1}
-                >
-                  {'Descrição rápida do produto'}
-                </Text>
               </View>
             </View>
             <ButtonSolid
@@ -856,246 +482,6 @@ const InicioScreen = props => {
                   <Text
                     style={[styles.Text_5N, { color: theme.colors.medium }]}
                   >
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.Viewra} pointerEvents={'auto'}>
-              <View style={styles.View_8Y} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewoI,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImageyU, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.TextHL, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextE0, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.ViewxV} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewHE,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Imageop, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.TextXy, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextFH, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.Viewed} pointerEvents={'auto'}>
-              <View style={styles.ViewZk} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewYv,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImageTg, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.Text_1I, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextK3, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.ViewAA} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewNK,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Imager2, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.TextEm, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.Textmc, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.ViewnW} pointerEvents={'auto'}>
-              <View style={styles.ViewaC} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.Views0,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Image_9U, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.TextxH, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextWc, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.ViewJ8} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewQm,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.ImagenI, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.Text_3Z, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextoH, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.ViewRu} pointerEvents={'auto'}>
-              <View style={styles.ViewYS} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.ViewM2,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Image_5v, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.Textmt, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextKa, { color: theme.colors.medium }]}>
-                    {'teste2'}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.ViewOa} pointerEvents={'auto'}>
-                <View
-                  style={[
-                    styles.Viewyb,
-                    {
-                      backgroundColor: theme.colors.divider,
-                      borderRadius: theme.roundness,
-                    },
-                  ]}
-                >
-                  <Image
-                    style={[styles.Imagem0, { borderRadius: theme.roundness }]}
-                    source={Images.DraftbitTeamPhoto}
-                    resizeMode={'cover'}
-                  />
-                  <Text
-                    style={[styles.TextEG, { color: theme.colors.medium }]}
-                    ellipsizeMode={'tail'}
-                    numberOfLines={2}
-                  >
-                    {'test1'}
-                  </Text>
-
-                  <Text style={[styles.TextnQ, { color: theme.colors.medium }]}>
                     {'teste2'}
                   </Text>
                 </View>
@@ -1279,361 +665,54 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 7,
   },
-  ImageBW: {
+  ImageQs: {
     height: 180,
     width: '100%',
   },
-  TextnT: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  TexthS: {
-    fontSize: 13,
-  },
-  Viewer: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ViewgO: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  ViewwG: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  Text_7a: {
+  Textnz: {
+    marginTop: 4,
     fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
+    fontWeight: '600',
+    fontSize: 15,
   },
-  Touchable_0r: {
-    width: '49%',
-    marginRight: '1%',
-  },
-  View_5p: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 15,
-  },
-  ImagetA: {
-    height: 180,
-    width: '100%',
-  },
-  TextpE: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  TextWP: {
-    fontSize: 13,
-  },
-  ViewWj: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ViewXX: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  Viewdo: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  Text_9m: {
+  TextJT: {
     fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
+    fontWeight: 'regular',
+    fontSize: 12,
   },
-  ViewDW: {
+  Viewsz: {
+    marginRight: 20,
+    height: 180,
+    width: '100%',
+  },
+  ViewO8: {
     marginRight: '1%',
     width: '49%',
   },
-  ImageRc: {
-    height: 180,
-    width: '100%',
-  },
-  Textke: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  Texte8: {
-    fontSize: 13,
-  },
-  ViewpF: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  Viewo6: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  View_1m: {
-    marginRight: 20,
+  ImageNb: {
     width: '100%',
     height: 180,
   },
-  Textb6: {
+  TextgJ: {
+    marginTop: 4,
     fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
+    fontWeight: '600',
+    fontSize: 15,
   },
-  View_5X: {
-    marginRight: '1%',
+  TextDs: {
+    fontFamily: 'System',
+    fontWeight: 'regular',
+    fontSize: 12,
+  },
+  Viewlp: {
+    height: 180,
+    width: '100%',
+  },
+  ViewfT: {
+    marginLeft: '1%',
     width: '49%',
   },
-  Viewd3: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  ImageQ9: {
-    height: 180,
-    width: '100%',
-  },
-  TextIJ: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  Textqn: {
-    fontSize: 13,
-  },
-  Viewil: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  View_6w: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  ViewKM: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  Textba: {
-    fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  ViewsV: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  Imagern: {
-    height: 180,
-    width: '100%',
-  },
-  TextpZ: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  TextcU: {
-    fontSize: 13,
-  },
-  ViewFl: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ViewuN: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  ViewKN: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  TextFU: {
-    fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  ViewkC: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  ViewXR: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  ImageaA: {
-    height: 180,
-    width: '100%',
-  },
-  TextAO: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  TextID: {
-    fontSize: 13,
-  },
-  Vieww5: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ViewtW: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  Viewkv: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  TextI9: {
-    fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  View_9a: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  Imageyr: {
-    height: 180,
-    width: '100%',
-  },
-  TextQW: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    textDecorationLine: 'line-through',
-  },
-  Textx4: {
-    fontSize: 13,
-  },
-  View_1N: {
-    width: '40%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  View_4r: {
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'dotted',
-    paddingLeft: 4,
-    marginRight: 4,
-    alignItems: 'flex-start',
-    marginLeft: 4,
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 4,
-    paddingRight: 4,
-  },
-  View_0p: {
-    marginRight: 20,
-    width: '100%',
-    height: 180,
-  },
-  TextyL: {
-    fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 14,
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  ViewZd: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  ViewQc: {
+  ViewbR: {
     flexDirection: 'row',
     marginLeft: 5,
     marginRight: 5,
@@ -1698,218 +777,6 @@ const styles = StyleSheet.create({
     width: '49%',
   },
   View_82: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  ImageyU: {
-    height: 180,
-    width: '100%',
-  },
-  TextHL: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextE0: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewoI: {
-    marginRight: 20,
-    height: 180,
-    width: '100%',
-  },
-  View_8Y: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  Imageop: {
-    width: '100%',
-    height: 180,
-  },
-  TextXy: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextFH: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewHE: {
-    height: 180,
-    width: '100%',
-  },
-  ViewxV: {
-    marginLeft: '1%',
-    width: '49%',
-  },
-  Viewra: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  ImageTg: {
-    height: 180,
-    width: '100%',
-  },
-  Text_1I: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextK3: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewYv: {
-    marginRight: 20,
-    height: 180,
-    width: '100%',
-  },
-  ViewZk: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  Imager2: {
-    width: '100%',
-    height: 180,
-  },
-  TextEm: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  Textmc: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewNK: {
-    height: 180,
-    width: '100%',
-  },
-  ViewAA: {
-    marginLeft: '1%',
-    width: '49%',
-  },
-  Viewed: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  Image_9U: {
-    height: 180,
-    width: '100%',
-  },
-  TextxH: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextWc: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  Views0: {
-    marginRight: 20,
-    height: 180,
-    width: '100%',
-  },
-  ViewaC: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  ImagenI: {
-    width: '100%',
-    height: 180,
-  },
-  Text_3Z: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextoH: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewQm: {
-    height: 180,
-    width: '100%',
-  },
-  ViewJ8: {
-    marginLeft: '1%',
-    width: '49%',
-  },
-  ViewnW: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    marginBottom: 45,
-  },
-  Image_5v: {
-    height: 180,
-    width: '100%',
-  },
-  Textmt: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextKa: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  ViewM2: {
-    marginRight: 20,
-    height: 180,
-    width: '100%',
-  },
-  ViewYS: {
-    marginRight: '1%',
-    width: '49%',
-  },
-  Imagem0: {
-    width: '100%',
-    height: 180,
-  },
-  TextEG: {
-    marginTop: 4,
-    fontFamily: 'System',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  TextnQ: {
-    fontFamily: 'System',
-    fontWeight: 'regular',
-    fontSize: 12,
-  },
-  Viewyb: {
-    height: 180,
-    width: '100%',
-  },
-  ViewOa: {
-    marginLeft: '1%',
-    width: '49%',
-  },
-  ViewRu: {
     flexDirection: 'row',
     marginLeft: 5,
     marginRight: 5,

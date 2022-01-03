@@ -3,7 +3,11 @@ import { View, ActivityIndicator } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DeviceVariables = { postalCode: 49400000, lastUpdateConfigFiles: 0 };
+const DeviceVariables = {
+  postalCode: 49400000,
+  lastUpdateConfigFiles: 0,
+  configFileJson: '',
+};
 const AppVariables = {};
 const GlobalVariableContext = React.createContext();
 const GlobalVariableUpdater = React.createContext();
