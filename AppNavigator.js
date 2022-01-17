@@ -8,12 +8,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import theme from './themes/DraftbitTheme.js';
 
 import AnunciosScreen from './screens/AnunciosScreen';
-import CutScreen from './screens/CutScreen';
+import AuthCodeScreen from './screens/AuthCodeScreen';
+import AuthNumScreen from './screens/AuthNumScreen';
 import InicioScreen from './screens/InicioScreen';
 import LoaderScreen from './screens/LoaderScreen';
 import MinhaCarteiraScreen from './screens/MinhaCarteiraScreen';
 import MinhaContaScreen from './screens/MinhaContaScreen';
-import RestaurantListScreen from './screens/RestaurantListScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,7 +37,7 @@ function PlaceholderScreen() {
   );
 }
 
-function BottomTabNavigator() {
+function TabNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="InicioScreen"
@@ -73,7 +73,8 @@ function BottomTabNavigator() {
         name="AnunciosScreen"
         component={AnunciosScreen}
         options={{
-          unmountOnBlur: false,
+          tabBarVisible: false,
+          unmountOnBlur: true,
           title: 'anuncios',
           tabBarIcon: ({ focused, color }) => (
             <Icon
@@ -106,7 +107,7 @@ function BottomTabNavigator() {
         component={MinhaContaScreen}
         options={{
           unmountOnBlur: true,
-          title: 'MinhaConta',
+          title: 'minhaConta',
           tabBarIcon: ({ focused, color }) => (
             <Icon
               name="Feather/user"
@@ -118,6 +119,18 @@ function BottomTabNavigator() {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+function AuthNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="PlaceholderScreen"
+        component={PlaceholderScreen}
+        options={{ mode: 'modal', headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 
@@ -150,24 +163,17 @@ export default function RootAppNavigator() {
           }}
         />
         <Stack.Screen
-          name="CutScreen"
-          component={CutScreen}
-          options={{
-            gestureEnabled: true,
-            gestureDirection: 'horizontal',
-            animationEnabled: true,
-            title: 'cut',
-          }}
+          name="AuthNumScreen"
+          component={AuthNumScreen}
+          options={{ title: 'authNum' }}
         />
         <Stack.Screen
-          name="RestaurantListScreen"
-          component={RestaurantListScreen}
-          options={{ title: ' Restaurant List' }}
+          name="AuthCodeScreen"
+          component={AuthCodeScreen}
+          options={{ title: 'authCode' }}
         />
-        <Stack.Screen
-          name="BottomTabNavigator"
-          component={BottomTabNavigator}
-        />
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

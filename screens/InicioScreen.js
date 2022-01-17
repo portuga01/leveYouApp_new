@@ -30,8 +30,6 @@ const InicioScreen = props => {
   const Constants = GlobalVariables.useValues();
   const Variables = Constants;
 
-  const { theme } = props;
-
   // Verificar se o banner verde de campanha está ativo para este CEP
   const bannerTopIsActive = configFileJson => {
     try {
@@ -41,6 +39,8 @@ const InicioScreen = props => {
       return false;
     }
   };
+
+  const { theme } = props;
 
   const [tabView1, setTabView1] = React.useState('');
 
@@ -65,32 +65,48 @@ const InicioScreen = props => {
                 ellipsizeMode={'tail'}
                 numberOfLines={1}
               >
-                {'{Constants["configFileJson"].campaign.name}'}
+                {'aza'}
               </Text>
 
               <Text
-                style={[styles.TextBA, { color: theme.colors.strong }]}
+                style={styles.TextBA}
                 ellipsizeMode={'tail'}
                 numberOfLines={2}
               >
-                {null}
+                {'example text for descriptio of campanig bla bla bla'}
               </Text>
             </View>
           </Touchable>
         )}
       </>
       <View style={styles.ViewZb}>
-        <Image
-          style={styles.ImageYr}
-          resizeMode={'contain'}
-          source={Images.HeaderIcon}
-        />
+        <View style={styles.Viewyt} pointerEvents={'auto'} />
+        <View pointerEvents={'auto'}>
+          <Image
+            style={styles.ImageYr}
+            resizeMode={'contain'}
+            source={Images.LogoCut}
+          />
+        </View>
+
+        <View style={styles.ViewrC} pointerEvents={'auto'}>
+          <Touchable>
+            <Icon
+              name={'MaterialIcons/chat-bubble-outline'}
+              color={theme.colors.medium}
+              size={25}
+            />
+          </Touchable>
+        </View>
       </View>
 
       <View style={styles.ViewrS} collapsable={true}>
         <Touchable>
           <Surface
-            style={[styles.SurfacekG, { borderRadius: 10 }]}
+            style={[
+              styles.SurfacekG,
+              { borderRadius: 10, borderColor: theme.colors.divider },
+            ]}
             elevation={3}
           >
             <View style={styles.Viewwa} pointerEvents={'auto'}>
@@ -210,10 +226,7 @@ const InicioScreen = props => {
                   const listData = item;
                   return (
                     <Touchable>
-                      <View
-                        style={[styles.View_5e, { borderRadius: 10 }]}
-                        pointerEvents={'auto'}
-                      >
+                      <View style={styles.View_5e} pointerEvents={'auto'}>
                         <CircleImage
                           style={styles.CircleImageat}
                           source={{
@@ -508,8 +521,8 @@ const styles = StyleSheet.create({
   },
   TextBA: {
     fontFamily: 'System',
-    fontWeight: '400',
-    fontSize: 15,
+    fontWeight: '500',
+    fontSize: 14,
   },
   View_4h: {
     paddingLeft: 15,
@@ -517,16 +530,24 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
+  Viewyt: {
+    width: 25,
+  },
   ImageYr: {
     height: 50,
-    width: 150,
+    width: 55,
+  },
+  ViewrC: {
+    alignSelf: 'center',
   },
   ViewZb: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
     maxHeight: 56,
-    marginTop: 33,
+    marginTop: 20,
+    marginLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+    justifyContent: 'space-between',
   },
   TextSq: {
     fontFamily: 'System',
@@ -544,6 +565,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: 50,
+    borderLeftWidth: 1,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
   },
   ViewrS: {
     marginTop: 33,

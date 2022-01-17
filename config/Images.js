@@ -1,4 +1,5 @@
 export default {
+  LogoCut: require('../assets/images/LogoCut.png'),
   Guac: require('../assets/images/Guac.jpg'),
   Gradient: require('../assets/images/Gradient.jpg'),
   DraftbitTeamPhoto: require('../assets/images/DraftbitTeamPhoto.jpg'),

@@ -8,7 +8,7 @@ const DeviceVariables = {
   lastUpdateConfigFiles: 0,
   configFileJson: '',
 };
-const AppVariables = {};
+const AppVariables = { modalTerms: false };
 const GlobalVariableContext = React.createContext();
 const GlobalVariableUpdater = React.createContext();
 
