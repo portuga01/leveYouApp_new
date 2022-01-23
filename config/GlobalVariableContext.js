@@ -4,11 +4,13 @@ import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DeviceVariables = {
-  postalCode: 49400000,
-  lastUpdateConfigFiles: 0,
-  configFileJson: '',
+  searchHistory: false,
+  jsonWebToken: false,
+  toImportPKG: false,
+  cityCode: false,
+  configFileJson: false,
 };
-const AppVariables = { modalTerms: false };
+const AppVariables = { modalTerms: false, actionSheetChat: false };
 const GlobalVariableContext = React.createContext();
 const GlobalVariableUpdater = React.createContext();
 

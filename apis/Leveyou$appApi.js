@@ -9,8 +9,11 @@ import useFetch from 'react-fetch-hook';
 import { useIsFocused } from '@react-navigation/native';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 
-export const verifyNumberPOST = (Constants, { phone }) =>
-  fetch(`https://leveyou.herokuapp.com/br/verify`, {
+export const authUserPOST = (
+  Constants,
+  { code, continueAuthorization, phone }
+) =>
+  fetch(`https://leveyou.herokuapp.com/br/auth`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -18,7 +21,11 @@ export const verifyNumberPOST = (Constants, { phone }) =>
         'Basic Vm5wR2MxRnRSbnBoVjAxblYxWmtOVjAxblYxWmtOR0ZHY0VoVmJrSnBZ',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ phone: phone }),
+    body: JSON.stringify({
+      phone: phone,
+      code: code,
+      continueAuthorization: continueAuthorization,
+    }),
   })
     .then(res => {
       if (!res.ok) {
@@ -28,12 +35,12 @@ export const verifyNumberPOST = (Constants, { phone }) =>
     })
     .then(res => res.json());
 
-export const useVerifyNumberPOST = initialArgs => {
+export const useAuthUserPOST = initialArgs => {
   const queryClient = useQueryClient();
   const Constants = GlobalVariables.useValues();
 
   return useMutation(
-    args => verifyNumberPOST(Constants, { ...initialArgs, ...args }),
+    args => authUserPOST(Constants, { ...initialArgs, ...args }),
     {
       onError: (err, variables, { previousValue }) => {
         if (previousValue) {

@@ -7,13 +7,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import theme from './themes/DraftbitTheme.js';
 
-import AnunciosScreen from './screens/AnunciosScreen';
+import AnnounceScreen from './screens/AnnounceScreen';
 import AuthCodeScreen from './screens/AuthCodeScreen';
 import AuthNumScreen from './screens/AuthNumScreen';
-import InicioScreen from './screens/InicioScreen';
+import CampaingScreen from './screens/CampaingScreen';
+import ChatScreen from './screens/ChatScreen';
+import ConversationsScreen from './screens/ConversationsScreen';
+import HomeScreen from './screens/HomeScreen';
 import LoaderScreen from './screens/LoaderScreen';
-import MinhaCarteiraScreen from './screens/MinhaCarteiraScreen';
-import MinhaContaScreen from './screens/MinhaContaScreen';
+import MyAccountScreen from './screens/MyAccountScreen';
+import MyWalletScreen from './screens/MyWalletScreen';
+import SearchScreen from './screens/SearchScreen';
+import ShopCutScreen from './screens/ShopCutScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,7 +45,7 @@ function PlaceholderScreen() {
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="InicioScreen"
+      initialRouteName="HomeScreen"
       tabBarOptions={{
         allowFontScaling: false,
         keyboardHidesTabBar: true,
@@ -51,14 +56,14 @@ function TabNavigator() {
           borderTopColor: theme.colors.divider,
         },
       }}
-      backBehavior="initialRoute"
+      backBehavior="history"
     >
       <Tab.Screen
-        name="InicioScreen"
-        component={InicioScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
           unmountOnBlur: false,
-          title: 'inicio',
+          title: 'home',
           tabBarIcon: ({ focused, color }) => (
             <Icon
               name="Feather/shopping-bag"
@@ -70,12 +75,12 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="AnunciosScreen"
-        component={AnunciosScreen}
+        name="AnnounceScreen"
+        component={AnnounceScreen}
         options={{
           tabBarVisible: false,
           unmountOnBlur: true,
-          title: 'anuncios',
+          title: 'announce',
           tabBarIcon: ({ focused, color }) => (
             <Icon
               name="Feather/tag"
@@ -87,11 +92,11 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="MinhaCarteiraScreen"
-        component={MinhaCarteiraScreen}
+        name="MyWalletScreen"
+        component={MyWalletScreen}
         options={{
           unmountOnBlur: true,
-          title: 'minhaCarteira',
+          title: 'myWallet',
           tabBarIcon: ({ focused, color }) => (
             <Icon
               name="Feather/dollar-sign"
@@ -103,11 +108,11 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="MinhaContaScreen"
-        component={MinhaContaScreen}
+        name="MyAccountScreen"
+        component={MyAccountScreen}
         options={{
           unmountOnBlur: true,
-          title: 'minhaConta',
+          title: 'myAccount',
           tabBarIcon: ({ focused, color }) => (
             <Icon
               name="Feather/user"
@@ -124,11 +129,131 @@ function TabNavigator() {
 
 function AuthNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      headerMode="none"
+      initialRouteName="AuthNumScreen"
+      screenOptions={{
+        gestureEnabled: true,
+        gestureDirection: 'vertical',
+        animationEnabled: true,
+      }}
+    >
       <Stack.Screen
-        name="PlaceholderScreen"
-        component={PlaceholderScreen}
-        options={{ mode: 'modal', headerShown: false }}
+        name="AuthNumScreen"
+        component={AuthNumScreen}
+        options={{ title: 'authNum' }}
+      />
+      <Stack.Screen
+        name="AuthCodeScreen"
+        component={AuthCodeScreen}
+        options={{ title: 'authCode' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function CampaingNavigator() {
+  return (
+    <Stack.Navigator headerMode="screen">
+      <Stack.Screen
+        name="CampaingScreen"
+        component={CampaingScreen}
+        options={{
+          headerTitle: 'title campaing where',
+          headerTitleAlign: 'center',
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          animationEnabled: true,
+          headerBackImage: ({ tintColor }) => (
+            <Icon
+              name="Feather/chevron-left"
+              size={Platform.OS === 'ios' ? 21 : 24}
+              color={tintColor}
+              style={[styles.headerIcon, styles.headerIconLeft]}
+            />
+          ),
+          headerBackTitle: 'voltar',
+          title: 'campaing',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ChatNavigator() {
+  return (
+    <Stack.Navigator headerMode="screen">
+      <Stack.Screen
+        name="ConversationsScreen"
+        component={ConversationsScreen}
+        options={{
+          headerTitle: 'Chat leveYou',
+          headerTitleAlign: 'center',
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          animationEnabled: true,
+          headerBackImage: ({ tintColor }) => (
+            <Icon
+              name="Feather/chevron-left"
+              size={Platform.OS === 'ios' ? 21 : 24}
+              color={tintColor}
+              style={[styles.headerIcon, styles.headerIconLeft]}
+            />
+          ),
+          headerBackTitle: ' voltar',
+          title: 'conversations',
+        }}
+      />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={{
+          headerShown: false,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          animationEnabled: true,
+          title: 'chat',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function OtherNavigator() {
+  return (
+    <Stack.Navigator headerMode="screen">
+      <Stack.Screen
+        name="ShopCutScreen"
+        component={ShopCutScreen}
+        options={{
+          headerShown: false,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          animationEnabled: true,
+          title: 'shopCut',
+        }}
+      />
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{
+          headerTitle: ' ',
+          headerTitleAlign: 'center',
+          cardOverlayEnabled: true,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          animationEnabled: true,
+          headerBackImage: ({ tintColor }) => (
+            <Icon
+              name="Feather/chevron-left"
+              size={Platform.OS === 'ios' ? 21 : 24}
+              color={tintColor}
+              style={[styles.headerIcon, styles.headerIconLeft]}
+            />
+          ),
+          headerBackTitle: 'voltar',
+          title: 'search',
+        }}
       />
     </Stack.Navigator>
   );
@@ -155,6 +280,7 @@ export default function RootAppNavigator() {
           name="LoaderScreen"
           component={LoaderScreen}
           options={{
+            headerShown: false,
             cardOverlayEnabled: true,
             gestureEnabled: true,
             gestureDirection: 'horizontal',
@@ -162,18 +288,11 @@ export default function RootAppNavigator() {
             title: 'loaderScreen',
           }}
         />
-        <Stack.Screen
-          name="AuthNumScreen"
-          component={AuthNumScreen}
-          options={{ title: 'authNum' }}
-        />
-        <Stack.Screen
-          name="AuthCodeScreen"
-          component={AuthCodeScreen}
-          options={{ title: 'authCode' }}
-        />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
+        <Stack.Screen name="CampaingNavigator" component={CampaingNavigator} />
+        <Stack.Screen name="ChatNavigator" component={ChatNavigator} />
+        <Stack.Screen name="OtherNavigator" component={OtherNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

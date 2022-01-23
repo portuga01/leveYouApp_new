@@ -60,7 +60,7 @@ const AuthNumScreen = props => {
   const { theme } = props;
   const { navigation } = props;
 
-  const verifyNumberPOST = Leveyou$appApi.useVerifyNumberPOST();
+  const authUserPOST = Leveyou$appApi.useAuthUserPOST();
 
   const [checkboxValue, setCheckboxValue] = React.useState(false);
   const [textInputValue, setTextInputValue] = React.useState('');
@@ -165,11 +165,12 @@ const AuthNumScreen = props => {
             onPress={async () => {
               try {
                 verify(textInputValue, checkboxValue);
-                const responsePostNum = await verifyNumberPOST.mutateAsync({
+                const responsePostNum = await authUserPOST.mutateAsync({
                   phone: parseInt(textInputValue, 10),
                 });
-                navigation.navigate('AuthCodeScreen', {
-                  numToAuth: textInputValue,
+                navigation.navigate('AuthNavigator', {
+                  screen: 'AuthCodeScreen',
+                  params: { continueAuthorization: responsePostNum },
                 });
               } catch (err) {
                 console.error(err);
@@ -180,7 +181,7 @@ const AuthNumScreen = props => {
               { backgroundColor: theme.colors.primary },
             ]}
             title={'Continuar'}
-            icon={'Feather/arrow-right'}
+            icon={'Feather/mail'}
             loading={false}
           />
         </View>
